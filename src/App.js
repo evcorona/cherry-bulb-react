@@ -1,25 +1,33 @@
-import logo from './logo.svg';
+import React, { Component } from 'react'
+import { Button } from 'reactstrap';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor() {
+    super()
+    this.state = {
+      isOn: false
+    }
+    this.clickHandler = this.clickHandler.bind(this)
+  }
+  changeHandler(event) {
+    let newText = event.target.value
+    this.setState({ textToShow: newText })
+    console.log(newText)
+  }
+  clickHandler() {
+    console.log(this.state.isOn)
+    this.setState({ isOn: !this.state.isOn })
+  }
+  render() {
+    return (
+      <div className="App">
+        <div className="container mt-3">
+          <i className={this.state.isOn ? "fas fa-lightbulb text-warning" : "far fa-lightbulb"}></i>
+          <Button className="m-4" onClick={this.clickHandler}>{this.state.isOn ? "Apagar" : "Encender"}</Button>
+        </div>
+      </div>
+    )
+  }
 }
-
 export default App;
